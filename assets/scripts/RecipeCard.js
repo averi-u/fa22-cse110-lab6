@@ -18,7 +18,8 @@ class RecipeCard extends HTMLElement {
 
 
     // A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
-    style.textContent = `* {
+    style.textContent = `
+    * {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -96,8 +97,9 @@ class RecipeCard extends HTMLElement {
 
 
     // A5. TODO - Append the <style> and <article> elements to the Shadow DOM
-    shadowOpen.appendChild(style);
+    
     shadowOpen.appendChild(article);
+    shadowOpen.appendChild(style);
 
   }
 
@@ -129,7 +131,7 @@ class RecipeCard extends HTMLElement {
     // A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
     const arti = this.shadowRoot.querySelector("article"); 
     // A7. TODO - Set the contents of the <article> with the <article> template given in
-    arti.innerHTML = `  <img src="${data["imgSrc"]}"
+    arti.innerHTML = `<img src="${data["imgSrc"]}"
     alt="${data["imgAlt"]}">
   <p class="title">
     <a href="${data["titleLnk"]}">${data["titleTxt"]}</a>
