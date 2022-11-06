@@ -69,6 +69,7 @@ function saveRecipesToStorage(recipes) {
   localStorage.setItem('recipe-titleTxt', rec);
 }
 
+
 /**
  * Adds the necesarry event handlers to <form> and the clear storage
  * <button>.
