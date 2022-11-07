@@ -52,7 +52,6 @@ function addRecipesToDocument(recipes) {
     main.appendChild(rec);
   });
     
-  
 }
 
 /**
@@ -65,8 +64,8 @@ function saveRecipesToStorage(recipes) {
   // B1. TODO - Complete the functionality as described in this function
   //            header. It is possible in only a single line, but should
   //            be no more than a few lines.
-  var rec = string(recipes.titleTxt); 
-  localStorage.setItem('recipe-titleTxt', rec);
+  var rec = JSON.stringify(recipes); 
+  localStorage.setItem('recipes', rec);
 }
 
 
@@ -77,7 +76,7 @@ function saveRecipesToStorage(recipes) {
 function initFormHandler() {
 
   // B2. TODO - Get a reference to the <form> element
-  var form = document.querySelector(form);
+  const form = document.querySelector("form");
   
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the
   //            submit button is clicked
@@ -93,32 +92,37 @@ function initFormHandler() {
   // B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
   //            then save the recipes array back to localStorage
   const submitButton = document.querySelector('[type="submit"]');
-  submitButton.addEventListener('click', submit());
-  function submit(){
-    var formData = new FormData(form);
 
-    var recipeObject = {}; 
-    recipeObject = {
-      imgAlt: formData.get("imgAlt"),
-      imgSrc: formData.get("imgSrc"),
-      ingredients: formData.get("ingredients"),
-      lengthTime: formData.get("lengthTime"),
-      numRatings: formData.get("numRatings"),
-      organization: formData.get("organization"),
-      rating: formData.get("rating"),
-      titleLnk: formData.get("titleLnk"),
-      titleTxt: formData.get("titleTxt"),
-    }
-  }
 
-  // var ele = Document.createElement("recipe-card");
-  let recipeArr = [];
-  recipeArr.push(recipeObject);
-  addRecipesToDocument(recipeArr);
 
-  let recipesFound = getRecipesFromStorage();
-  recipesFound.push(recipeObject);
-  saveRecipesToStorage(recipesFound);
+  submitButton.addEventListener('click', 
+    function (){
+      const main = document.querySelector("main");
+      var formData = new FormData(form);
+  
+      var recipeObject = {}; 
+      recipeObject = {
+        imgAlt: formData.get("imgAlt"),
+        imgSrc: formData.get("imgSrc"),
+        ingredients: formData.get("ingredients"),
+        lengthTime: formData.get("lengthTime"),
+        numRatings: formData.get("numRatings"),
+        organization: formData.get("organization"),
+        rating: formData.get("rating"),
+        titleLnk: formData.get("titleLnk"),
+        titleTxt: formData.get("titleTxt"),
+      };
+  
+      // var ele = Document.createElement("recipe-card");
+      let recipeArr = [];
+      recipeArr.push(recipeObject);
+      addRecipesToDocument(recipeArr);
+  
+      let recipesFound = getRecipesFromStorage();
+      recipesFound.push(recipeObject);
+      saveRecipesToStorage(recipesFound);
+    
+  });
 
 
   // B10. TODO - Get a reference to the "Clear Local Storage" button
@@ -132,3 +136,5 @@ function initFormHandler() {
     document.querySelector("main").innerHTML = "";
   });
 }
+
+
